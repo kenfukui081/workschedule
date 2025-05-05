@@ -7,7 +7,7 @@ export default function Home() {
       <h1 className="text-3xl font-bold mb-6">シフト管理アプリ</h1>
 
       <section className="bg-white rounded-lg shadow p-6 mb-8">
-        <h2 className="text-xl font-semibold mb-4">従業員一覧</h2>
+        <h2 className="text-xl font-semibold mb-4">従業員</h2>
         <ul className="space-y-2">
           {users.map((name, index) => (
             <li key={index} className="p-3 border rounded">
