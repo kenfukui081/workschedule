@@ -1,8 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation'; // ✅ 追加！
 
 export default function ShiftCalendar() {
+  const router = useRouter(); // ✅ 追加！
+
   const initialRow = ['○', '1', '×', '1', '△', '1'];
   const shiftDataTemplate = Array.from({ length: 10 }, () => ({
     date: '05.07（水）',
@@ -46,18 +49,21 @@ export default function ShiftCalendar() {
         {shiftData.map((row, rowIndex) => (
           <div
             key={rowIndex}
-            className="bg-gray-200 rounded-full flex items-center justify-between px-4 py-3 shadow"
+            className="bg-gray-200 rounded-full flex items-center justify-between px-4 py-3 shadow cursor-pointer hover:bg-gray-300 transition"
+            onClick={() => router.push('/newpage/day-schedule')} // ✅ 遷移を追加
           >
             <div className="min-w-[90px] font-medium">{row.date}</div>
             <div className="flex gap-4">
               {row.slots.map((slot, slotIndex) => (
                 <div
                   key={slotIndex}
-                  className="w-8 h-8 bg-white rounded shadow flex items-center justify-center cursor-pointer"
-                  onClick={() =>
-                    symbols.includes(slot) &&
-                    toggleSymbol(rowIndex, slotIndex)
-                  }
+                  className="w-8 h-8 bg-white rounded shadow flex items-center justify-center"
+                  onClick={(e) => {
+                    e.stopPropagation(); // ✅ クリックが親に伝播しないようにする
+                    if (symbols.includes(slot)) {
+                      toggleSymbol(rowIndex, slotIndex);
+                    }
+                  }}
                 >
                   {slot}
                 </div>

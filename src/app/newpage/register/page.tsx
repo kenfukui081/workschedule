@@ -1,4 +1,10 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
+
 export default function LoginPage() {
+  const router = useRouter(); //  ルーター取得
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-blue-500 to-cyan-200 flex flex-col items-center py-12 px-4 text-black">
       {/* タイトル */}
@@ -28,7 +34,10 @@ export default function LoginPage() {
       </div>
 
       {/* ログインボタン */}
-      <button className="bg-gray-200 text-black text-lg font-medium px-8 py-3 rounded-full shadow">
+      <button
+        onClick={() => router.push('/newpage/employee-schedule')} // ✅ クリックで遷移
+        className="bg-gray-200 text-black text-lg font-medium px-8 py-3 rounded-full shadow hover:bg-gray-300 transition"
+      >
         ログインする
       </button>
     </main>
